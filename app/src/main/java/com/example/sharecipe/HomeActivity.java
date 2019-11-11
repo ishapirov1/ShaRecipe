@@ -15,6 +15,7 @@ public class HomeActivity extends AppCompatActivity {
     Button bFind;
     Button bPost;
     Button bSaved;
+    Button bSettings;
 
     FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
@@ -25,7 +26,8 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         final Intent intentFind = new Intent(this,FindRecipe.class);
         final Intent intentPost = new Intent(this,PostRecipe.class);
-        final Intent intentSaved = new Intent(this,FindRecipe.class);
+        final Intent intentSaved = new Intent(this,SavedRecipe.class);
+        final Intent intentSettings = new Intent(this,SettingsActivity.class);
         bLogOut = findViewById(R.id.bLogOut);
 
         bLogOut.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +57,20 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        bSaved= findViewById(R.id.bViewFav);
+        bSaved.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(intentSaved);
+            }
+        });
 
+        bSettings = findViewById(R.id.bSettings);
+        bSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(intentSettings);
+            }
+        });
     }
 }
