@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".FinalRecipeInfo"></activity>
+        <activity android:name=".StepEditor" />
+        <activity android:name=".AddSteps" />
+        <activity android:name=".PostIngredients" />
+        <activity android:name=".SettingsActivity" />
         <activity android:name=".SavedRecipe" />
         <activity android:name=".PostRecipe" />
         <activity android:name=".FindRecipe" />
