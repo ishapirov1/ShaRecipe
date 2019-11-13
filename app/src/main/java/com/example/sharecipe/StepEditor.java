@@ -7,8 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class StepEditor extends AppCompatActivity {
+
+    String step;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,15 +20,26 @@ public class StepEditor extends AppCompatActivity {
 
         Button bStepDone = findViewById(R.id.bStepDone);
         final Intent stepDone = new Intent(this,AddSteps.class);
-        final EditText step = findViewById(R.id.etTheStep);
+        final EditText etStep = findViewById(R.id.etTheStep);
 
+        Intent intent = getIntent();
+
+        if(intent.getStringExtra("step") != null) {
+            step = intent.getStringExtra("step");
+        }
 
 
 
         bStepDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stepDone.putExtra("step",step.getText().toString());
+
+                String total;
+                if(step != null)
+                    total = step + "\nStep: "+etStep.getText().toString();
+                else
+                    total = "Step: "+etStep.getText().toString();
+                stepDone.putExtra("step",total);
                 startActivity(stepDone);
             }
         });

@@ -10,19 +10,24 @@ import android.widget.TextView;
 
 public class AddSteps extends AppCompatActivity {
 
+    String step;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_steps);
 
-        Button bDone = findViewById(R.id.bRecipeDone);
-        final Intent iDone = new Intent(this,PostRecipe.class);
 
         Intent intent = getIntent();
-        String step = intent.getStringExtra("step");
-        TextView step1 = findViewById(R.id.tvStep);
-        step1.setText(step);
+        if(intent.getStringExtra("step") != null) {
+            step = intent.getStringExtra("step");
+            TextView step1 = findViewById(R.id.tvStep);
+            if(step !=null)
+            step1.setText(step);
+        }
 
+
+        Button bDone = findViewById(R.id.bRecipeDone);
+        final Intent iDone = new Intent(this,PostRecipe.class);
         bDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -35,9 +40,12 @@ public class AddSteps extends AppCompatActivity {
         bAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                iStep.putExtra("step",step);
                 startActivity(iStep);
             }
         });
 
     }
+
+
 }
