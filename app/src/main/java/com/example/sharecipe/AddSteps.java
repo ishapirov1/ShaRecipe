@@ -40,6 +40,7 @@ public class AddSteps extends AppCompatActivity {
         bAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 iStep.putExtra("step",step);
                 startActivity(iStep);
             }
