@@ -7,18 +7,33 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import org.w3c.dom.Text;
-
-public class FinalRecipeInfo extends AppCompatActivity {
+public class SearchRecipeInfo extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_final_recipe_info);
+        setContentView(R.layout.activity_search_recipe_info);
+
+        final Button addToFav = findViewById(R.id.bSearchAddFav);
+        addToFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addToFav.setText("Added");
+                addToFav.setBackgroundResource(R.color.colorGreen);
+            }
+        });
+
+        final Intent i = new Intent(this,HomeActivity.class);
+
+        Button bDone = findViewById(R.id.bSearchDoneView);
+        bDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(i);
+            }
+        });
+
 
 
         Intent combine = getIntent();
@@ -27,20 +42,17 @@ public class FinalRecipeInfo extends AppCompatActivity {
         final String recipeName = combine.getStringExtra("name");
         final String recipeTime = combine.getStringExtra("time");
 
-        TextView tvName = findViewById(R.id.tvNameOfRecipe);
-        TextView tvTime = findViewById(R.id.tvTime);
+        TextView tvName = findViewById(R.id.tvSearchNameOfRec);
+        TextView tvTime = findViewById(R.id.tvSearchTimeOfRec);
 
-        tvName.setText(recipeName);
-        tvTime.setText(recipeTime);
+        tvName.setText("Cake");
+        tvTime.setText("< 5 minutes");
 
+        Button bSteps = findViewById(R.id.bSearchViewSteps);
+        Button bIngred = findViewById(R.id.bSearchViewIng);
 
-
-
-        Button bSteps = findViewById(R.id.bViewSteps);
-        Button bIngred = findViewById(R.id.bViewIng);
-
-        final Intent viewSteps = new Intent(this,ViewSteps.class);
-        final Intent viewIngredients = new Intent(this,ViewIngredients.class);
+        final Intent viewSteps = new Intent(this,SearchViewSteps.class);
+        final Intent viewIngredients = new Intent(this,SearchViewIng.class);
         bSteps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,23 +75,5 @@ public class FinalRecipeInfo extends AppCompatActivity {
             }
         });
 
-        final Button addToFav = findViewById(R.id.bAddToFav);
-        addToFav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addToFav.setText("Added");
-                addToFav.setBackgroundResource(R.color.colorGreen);
-            }
-        });
-
-        final Intent i = new Intent(this,HomeActivity.class);
-        Button bDone = findViewById(R.id.bRecipeDone);
-
-        bDone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(i);
-            }
-        });
     }
 }

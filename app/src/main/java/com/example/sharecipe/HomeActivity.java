@@ -26,7 +26,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         final Intent intentFind = new Intent(this,FindRecipe.class);
         final Intent intentPost = new Intent(this,PostRecipe.class);
-        final Intent intentSaved = new Intent(this,SavedRecipe.class);
+        final Intent intentSaved = new Intent(this,SearchRecipeInfo.class);
         final Intent intentSettings = new Intent(this,SettingsActivity.class);
         bLogOut = findViewById(R.id.bLogOut);
 
@@ -65,12 +65,5 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        bSettings = findViewById(R.id.bSettings);
-        bSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(intentSettings);
-            }
-        });
     }
 }

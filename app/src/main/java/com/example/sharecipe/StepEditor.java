@@ -12,7 +12,7 @@ import android.widget.TextView;
 public class StepEditor extends AppCompatActivity {
 
     String step;
-
+    Integer stepCounter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,12 +23,15 @@ public class StepEditor extends AppCompatActivity {
         final EditText etStep = findViewById(R.id.etTheStep);
 
         Intent intent = getIntent();
-
-        if(intent.getStringExtra("step") != null) {
-            step = intent.getStringExtra("step");
+        stepCounter = intent.getIntExtra("stepC",0);
+        stepCounter++;
+        if(intent.getStringExtra("steps") != null) {
+            step = intent.getStringExtra("steps");
         }
 
-
+        final String[] recipeIngredients = intent.getStringArrayExtra("ingredients");
+        final String recipeName = intent.getStringExtra("name");
+        final String recipeTime = intent.getStringExtra("time");
 
         bStepDone.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,10 +39,14 @@ public class StepEditor extends AppCompatActivity {
 
                 String total;
                 if(step != null)
-                    total = step + "\nStep: "+etStep.getText().toString();
+                    total = step + "\nStep "+stepCounter + ": " + etStep.getText().toString();
                 else
-                    total = "Step: "+etStep.getText().toString();
-                stepDone.putExtra("step",total);
+                    total = "Step "+ stepCounter + ": " + etStep.getText().toString();
+                stepDone.putExtra("steps",total);
+                stepDone.putExtra("stepC",stepCounter);
+                stepDone.putExtra("ingredients",recipeIngredients);
+                stepDone.putExtra("name",recipeName);
+                stepDone.putExtra("time",recipeTime);
                 startActivity(stepDone);
             }
         });

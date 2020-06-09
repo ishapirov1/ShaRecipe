@@ -15,7 +15,7 @@ import java.lang.reflect.Array;
 
 public class IngredientEditor extends AppCompatActivity{
 
-    String prev;
+
     String name;
     String quan;
     String unit;
@@ -30,23 +30,45 @@ public class IngredientEditor extends AppCompatActivity{
         final EditText ingUnit = findViewById(R.id.etIngUnit);
 
         Intent intent = getIntent();
-        if(intent.getStringExtra("ingredients") != null)
-        prev = intent.getStringExtra("ingredients");
+        final String[] prev = intent.getStringArrayExtra("ingredients");
 
         Button bIngDone = findViewById(R.id.bIngDone);
         final Intent ingDone = new Intent(this,PostIngredients.class);
+        final String recipeSteps = intent.getStringExtra("steps");
+        final String recipeName = intent.getStringExtra("name");
+        final String recipeTime = intent.getStringExtra("time");
+        final Integer stepCounter = intent.getIntExtra("stepC",0);
         bIngDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 name = ingName.getText().toString();
-                unit = ingUnit.getText().toString();
                 quan = ingQuantity.getText().toString();
-                String total;
+                unit = ingUnit.getText().toString();
+                String[] firstTime = new String[3];
+                boolean first = false;
+
                 if(prev != null)
-                   total = prev + "\n"+name+"                     "+quan+"                "+unit;
+                {
+                 prev[0] += "\n"+name;
+                 prev[1] += "\n"+quan;
+                 prev[2] += "\n"+unit;
+                }
+                else {
+                    firstTime[0] = name;
+                    firstTime[1] = quan;
+                    firstTime[2] = unit;
+                    first = true;
+                }
+
+                if(first)
+                    ingDone.putExtra("ingredients",firstTime);
                 else
-                    total = name+"                     "+quan+"                "+unit;
-                ingDone.putExtra("ingred",total);
+                    ingDone.putExtra("ingredients",prev);
+
+                ingDone.putExtra("steps",recipeSteps);
+                ingDone.putExtra("name",recipeName);
+                ingDone.putExtra("time",recipeTime);
+                ingDone.putExtra("stepC",stepCounter);
                 startActivity(ingDone);
             }
         });
